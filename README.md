@@ -64,6 +64,7 @@ Setport Testing (testsetport.cpp) Instructions:
 	**Omit the brackets [] from VALUE
 
 UPDATE CHANGELOG CO5
+Added -e to also accept --environment
 set the environment variable PORT number to 3114
 set the environment variable BAR number to 3116
 add all necessary test cases to the unit test source file. 
