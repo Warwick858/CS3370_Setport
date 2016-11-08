@@ -75,7 +75,16 @@ string testCasesStrings[] = {
     "setport -p -e",
     "setport --port -e",
     "setport -p -e MY_PORT",
-    "setport --port -e YOUR_PORT"
+    "setport --port -e YOUR_PORT",
+    "setport --port -e PORT",
+    "setport --port --environment PORT",
+    "setport -p -e PORT",
+    "setport -p -e BAR",
+    "setport --port --environment BAR",
+    "setport --port --environment",
+    "setport --port -e",
+    "setport -p --environment",
+    "setport -p -e"
 }; // end array
 
 int main(){
@@ -176,6 +185,24 @@ void runTests(){
     result = system("./setport.cpp.o -p -e MY_PORT >test.txt") / 256;
     print(result);
     result = system("./setport.cpp.o --port -e YOUR_PORT >test.txt") / 256;
+    print(result);
+    result = system("./setport.cpp.o --port -e PORT >test.txt") / 256;
+    print(result);
+    result = system("./setport.cpp.o --port --environment PORT >test.txt") / 256;
+    print(result);
+    result = system("./setport.cpp.o -p -e PORT >test.txt") / 256;
+    print(result);
+    result = system("./setport.cpp.o -p -e BAR >test.txt") / 256;
+    print(result);
+    result = system("./setport.cpp.o --port --environment BAR >test.txt") / 256;
+    print(result);
+    result = system("./setport.cpp.o --port --environment >test.txt") / 256;
+    print(result);
+    result = system("./setport.cpp.o --port -e >test.txt") / 256;
+    print(result);
+    result = system("./setport.cpp.o -p --environment >test.txt") / 256;
+    print(result);
+    result = system("./setport.cpp.o -p -e >test.txt") / 256;
     print(result);
     cout << "See readme.txt if you would like to test the language feature. " << endl;
 } // end function runTests()
