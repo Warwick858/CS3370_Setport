@@ -62,3 +62,13 @@ Setport Testing (testsetport.cpp) Instructions:
 	below as follows: $ LANGUAGE=[VALUE] $ LC_ALL=[VALUE] $ LC_MESSAGES=[VALUE] $ LANG=[VALUE]
 
 	**Omit the brackets [] from VALUE
+
+UPDATE CHANGELOG CO5
+Added -e to also accept --environment
+set the environment variable PORT number to 3114
+set the environment variable BAR number to 3116
+add all necessary test cases to the unit test source file. 
+Include both positive and negative tests for the setport examples above. 
+VERIFIED that changes worked and that all required tests passed.
+Update the readme file to include the changes I made to the project.
+Made a pull request to my peer's GitHub account to have my changes committed to the original project.

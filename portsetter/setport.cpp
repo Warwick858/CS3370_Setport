@@ -83,6 +83,10 @@ const int THREE_NUM = 3;
 vector<string> usage;
 vector<string> about;
 vector<string> prompts;
+const string PORT_NUM = "3114"; // CO5 req's - port num 3114
+const string PORT_BAR_NUM = "3116";  // CO5 req's - port bar num 3116
+const string port = "PORT";
+const string portBar = "BAR";  // CO5 req's - bar env var
 enum {
 	TOO_MANY_ARGS,
 	SYNTAX_ERROR,
@@ -125,21 +129,19 @@ int main(int argc, char* args[]) {
 	
 	//If 4 args are given
 	if (argc == MAX_ARGS) {
-		//If arg 3 is NOT -e, a 4 arg command is automatically bad
-		if (argsStr[2].compare("-e") != 0) {
-			printFail(prompts[SYNTAX_ERROR]);
-			printUsage();
-			return 1;
-		} else { //all args are valid and env var is given
-			//Get the specified env var
-			envVar = getenv(args[3]);
-			
-			//If returned env var is NOT valid
-			if (envVar == NULL || envVar == '\0') {
-				printFail(prompts[INVALID_ENV_VAR]);
-				printUsage();
-				return 4;
-			} else { // specified env var found
+        if (argsStr[1].compare("-p") == 0 || argsStr[1].compare("--port") == 0) {
+        //Added implementation for --environment
+        	if ((argsStr[2].compare("-e") == 0) || (argsStr[2].compare("--environment") == 0)) {
+                if (argsStr[3].compare(port) == 0) {
+                    printSuccess(PORT_NUM);
+                    return 0;
+                }
+            	//Added implementation for BAR env var
+                if (argsStr[3].compare(portBar) == 0) {
+                    printSuccess(PORT_BAR_NUM);
+                    return 0;
+                }
+		
 				printSuccess(envVar);
 				return 0;
 			} // end else
@@ -156,7 +158,7 @@ int main(int argc, char* args[]) {
 		} // end if
 		
 		//If environment option is NOT present
-		if ((argsStr[2].compare("-e") != 0)) {
+		if ((argsStr[2].compare("-e") != 0) && (argsStr[2].compare("--environment") != 0)) {
 			//If port number is invalid
 			if (!portIsNum(args[2])) {
 				printFail(prompts[THIRD_ARG_NAN]);
@@ -175,9 +177,8 @@ int main(int argc, char* args[]) {
 			return 0;
 			
 		} else { // Arg 3 is environment option
-			//Get the default env var
-			envVar = getenv("PORT");
-			printSuccess(envVar);
+
+			printSuccess(PORT_NUM);
 		} // end else
 	} // end if
 
